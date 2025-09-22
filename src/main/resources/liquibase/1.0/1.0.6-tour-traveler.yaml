@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Tour Travel table
+      author: shahin.agasiyev
+      changes:
+        - createTable:
+            tableName: tour_travel
+            columns:
+              - column:
+                  name: tour_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_tour_travel_tour
+                    references: tours(id)
+              - column:
+                  name: travel_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_tour_travel_traveler
+                    references: travelers(id)
+        - addPrimaryKey:
+            tableName: tour_travel
+            columnNames: tour_id, travel_id
+            constraintName: pk_tour_travel

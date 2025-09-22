@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Tour Guide table
+      author: shahin.agasiyev
+      changes:
+      - createTable:
+          tableName: tour_guide
+          columns:
+            - column:
+                name: tour_id
+                type: BIGINT
+                constraints:
+                  nullable: false
+                  foreignKeyName: fk_tour_guide_tour
+                  references: tours(id)
+            - column:
+                name: guide_id
+                type: BIGINT
+                constraints:
+                  nullable: false
+                  foreignKeyName: fk_tour_guide_guide
+                  references: guides(id)
+      - addPrimaryKey:
+          tableName: tour_guide
+          columnNames: tour_id, guide_id
+          constraintName: pk_tour_guide

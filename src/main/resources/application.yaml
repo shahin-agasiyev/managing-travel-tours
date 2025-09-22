@@ -1,2 +1,12 @@
-server:
-  port: 8080
+spring:
+  application:
+    name: managing-travel-tours
+  datasource:
+    url: jdbc:postgresql://localhost:5434/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    open-in-view: false
+    show-sql: false
+  liquibase:
+    change-log: classpath:/liquibase/db.changelog-master.yaml
