@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Destination table
+      author: shahin.agasiyev
+      changes:
+        - createTable:
+            tableName: destinations
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: location
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: visit_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tour_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_destination_tour
+                    references: tours(id)

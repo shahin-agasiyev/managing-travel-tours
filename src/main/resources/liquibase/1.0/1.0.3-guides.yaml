@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create Guides table
+      author: shahin.agasiyev
+      changes:
+        - createTable:
+            tableName: guides
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  type: VARCHAR
+        - addUniqueConstraint:
+            tableName: guides
+            columnNames: email
+            constraintName: unique_guide_email
+        - addUniqueConstraint:
+            tableName: guides
+            columnNames: phone_number
+            constraintName: unique_guide_phone_number
