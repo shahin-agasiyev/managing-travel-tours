@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,21 +39,23 @@ public class DestinationEntity {
     String description;
     LocalDate visitDate;
 
-    @ManyToOne(
-            fetch = LAZY
-    )
+    @ManyToOne(fetch = LAZY)
     @ToString.Exclude
     TourEntity tour;
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        DestinationEntity that = (DestinationEntity) o;
-        return Objects.equals(id, that.id);
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        DestinationEntity destination = (DestinationEntity) o;
+        return getId() != null && Objects.equals(getId(), destination.getId());
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }

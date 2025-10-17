@@ -14,7 +14,9 @@ public interface GuideService {
 
     List<GuideResponse> getAllGuides();
 
-    void delete(Long id);
-
     List<GuideResponse> getAvailableGuides(LocalDate startDate, LocalDate endDate);
+
+    void update(Long id, @Valid GuideRequest guideRequest);
+
+    void delete(Long id);
 }

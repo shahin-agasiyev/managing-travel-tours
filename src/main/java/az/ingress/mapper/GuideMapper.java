@@ -23,4 +23,10 @@ public enum GuideMapper {
                 .phoneNumber(guideEntity.getPhoneNumber())
                 .build();
     }
+
+    public void updateGuideFields(GuideRequest guideRequest, GuideEntity guideEntity) {
+        if (guideRequest.getName() != null) guideEntity.setName(guideRequest.getName());
+        if (guideRequest.getEmail() != null) guideEntity.setEmail(guideRequest.getEmail());
+        if (guideRequest.getPhoneNumber() != null) guideEntity.setPhoneNumber(guideRequest.getPhoneNumber());
+    }
 }

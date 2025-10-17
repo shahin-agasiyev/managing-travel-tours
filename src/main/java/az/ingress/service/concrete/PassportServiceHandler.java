@@ -46,6 +46,13 @@ public class PassportServiceHandler implements PassportService {
     }
 
     @Override
+    public void update(Long id, PassportRequest passportRequest) {
+        var passportEntity = fetchPassportOrThrow(id);
+        if (passportRequest.getCountry() != null) passportEntity.setCountry(passportRequest.getCountry());
+        passportRepository.save(passportEntity);
+    }
+
+    @Override
     public void delete(Long id) {
         fetchPassportOrThrow(id);
         passportRepository.deleteById(id);

@@ -56,6 +56,13 @@ public class GuideServiceHandler implements GuideService {
                 .toList();
     }
 
+    @Override
+    public void update(Long id, GuideRequest guideRequest) {
+        var guideEntity = fetchGuideOrThrow(id);
+        GUIDE_MAPPER.updateGuideFields(guideRequest, guideEntity);
+        guideRepository.save(guideEntity);
+    }
+
     public GuideEntity fetchGuideOrThrow(Long id) {
         return guideRepository.findById(id)
                 .orElseThrow(() -> {

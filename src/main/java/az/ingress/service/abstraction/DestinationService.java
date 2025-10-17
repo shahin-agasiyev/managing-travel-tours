@@ -10,7 +10,9 @@ public interface DestinationService {
 
     DestinationResponse getById(Long id);
 
-    void delete(Long id);
-
     List<DestinationResponse> getAllByTourId(Long tourId);
+
+    void update(Long id, DestinationRequest request);
+
+    void delete(Long id);
 }

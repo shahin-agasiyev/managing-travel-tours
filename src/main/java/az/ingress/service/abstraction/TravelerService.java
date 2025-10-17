@@ -13,6 +13,8 @@ public interface TravelerService {
 
     List<TravelerResponse> getAll();
 
+    void update(Long id, @Valid TravelerRequest travelerRequest);
+
     List<TravelerResponse> getByTourId(Long tourId);
 
     void delete(Long id);

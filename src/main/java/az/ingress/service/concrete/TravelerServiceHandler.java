@@ -56,6 +56,13 @@ public class TravelerServiceHandler implements TravelerService {
     }
 
     @Override
+    public void update(Long id, TravelerRequest travelerRequest) {
+        var travelerEntity = fetchTravelerOrThrow(id);
+        TRAVELER_MAPPER.updateTravelerFields(travelerRequest, travelerEntity);
+        travelerRepository.save(travelerEntity);
+    }
+
+    @Override
     public void delete(Long id) {
         fetchTravelerOrThrow(id);
         travelerRepository.deleteById(id);

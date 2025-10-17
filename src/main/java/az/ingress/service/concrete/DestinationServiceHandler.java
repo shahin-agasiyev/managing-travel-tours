@@ -50,6 +50,20 @@ public class DestinationServiceHandler implements DestinationService {
     }
 
     @Override
+    public void update(Long id, DestinationRequest request) {
+        var destinationEntity = fetchDestinationOrThrow(id);
+        if (request.getLocation() != null) destinationEntity.setLocation(request.getLocation());
+        if (request.getDescription() != null) destinationEntity.setDescription(request.getDescription());
+        if (request.getVisitDate() != null) {
+            var tourEntity = tourServiceHandler.fetchTourOrThrow(destinationEntity.getTour().getId());
+            validateVisitDate(request, tourEntity);
+            destinationEntity.setVisitDate(request.getVisitDate());
+        }
+
+        destinationRepository.save(destinationEntity);
+    }
+
+    @Override
     public void delete(Long id) {
         fetchDestinationOrThrow(id);
         destinationRepository.deleteById(id);

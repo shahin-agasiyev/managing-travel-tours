@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +48,13 @@ public class GuideController {
         return guideService.getAllGuides();
     }
 
+    @ResponseStatus(OK)
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id,
+                       @RequestParam @Valid GuideRequest guideRequest) {
+        guideService.update(id, guideRequest);
+    }
+
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
@@ -55,7 +63,7 @@ public class GuideController {
 
     @GetMapping("/available")
     public List<GuideResponse> getAvailableGuides(
-            @RequestParam @DateTimeFormat(iso = DATE) LocalDate startDate, //TODO: haven't request param validation
+            @RequestParam @DateTimeFormat(iso = DATE) LocalDate startDate,
             @RequestParam @DateTimeFormat(iso = DATE) LocalDate endDate) {
         return guideService.getAvailableGuides(startDate, endDate);
     }

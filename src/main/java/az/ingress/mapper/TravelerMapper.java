@@ -23,4 +23,10 @@ public enum TravelerMapper {
                 .email(travelerEntity.getEmail())
                 .build();
     }
+
+    public void updateTravelerFields(TravelerRequest travelerRequest, TravelerEntity travelerEntity) {
+        if (travelerRequest.getFirstName() != null) travelerEntity.setFirstName(travelerRequest.getFirstName());
+        if (travelerRequest.getLastName() != null) travelerEntity.setLastName(travelerRequest.getLastName());
+        if (travelerRequest.getEmail() != null) travelerEntity.setEmail(travelerRequest.getEmail());
+    }
 }
